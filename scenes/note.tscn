@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://vagkv1ewd5x8"]
+
+[ext_resource type="Script" path="res://scripts/note.gd" id="1_2fr4i"]
+
+[sub_resource type="Gradient" id="Gradient_e1ru3"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.4, 0.4, 0.4, 1, 1, 1, 1, 1, 0.4, 0.4, 0.4, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1xmhd"]
+gradient = SubResource("Gradient_e1ru3")
+width = 160
+height = 40
+
+[node name="Note" type="Sprite2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = SubResource("GradientTexture2D_1xmhd")
+script = ExtResource("1_2fr4i")

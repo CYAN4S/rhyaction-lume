@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://lmnoet2inf7q"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_7hwx3"]
+[ext_resource type="Resource" uid="uid://dsqf6i5gjtrf6" path="res://example_chart.tres" id="2_wiqqc"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="3_xjvu4"]
+[ext_resource type="Script" path="res://scripts/beam.gd" id="4_u1yry"]
+
+[sub_resource type="Gradient" id="Gradient_nlwsd"]
+colors = PackedColorArray(0, 1, 0.917647, 0, 0, 1, 0.917647, 0.588235)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cxoby"]
+gradient = SubResource("Gradient_nlwsd")
+width = 160
+height = 1024
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_vnqh7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w1mac"]
+gradient = SubResource("Gradient_vnqh7")
+width = 640
+height = 24
+
+[sub_resource type="Gradient" id="Gradient_j4q8h"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rsfws"]
+gradient = SubResource("Gradient_j4q8h")
+width = 640
+height = 160
+
+[sub_resource type="LabelSettings" id="LabelSettings_gvxrt"]
+font_size = 50
+
+[node name="Main" type="Node"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("note_parent")]
+script = ExtResource("1_7hwx3")
+chart = ExtResource("2_wiqqc")
+note_parent = NodePath("../Gear/Judgement")
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("3_xjvu4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Gear" type="Node2D" parent="."]
+
+[node name="Beam (0)" type="Sprite2D" parent="Gear"]
+position = Vector2(784, 512)
+texture = SubResource("GradientTexture2D_cxoby")
+script = ExtResource("4_u1yry")
+
+[node name="Beam (1)" type="Sprite2D" parent="Gear"]
+position = Vector2(944, 512)
+texture = SubResource("GradientTexture2D_cxoby")
+script = ExtResource("4_u1yry")
+line = 1
+
+[node name="Beam (2)" type="Sprite2D" parent="Gear"]
+position = Vector2(1104, 512)
+texture = SubResource("GradientTexture2D_cxoby")
+script = ExtResource("4_u1yry")
+line = 2
+
+[node name="Beam (3)" type="Sprite2D" parent="Gear"]
+position = Vector2(1264, 512)
+texture = SubResource("GradientTexture2D_cxoby")
+script = ExtResource("4_u1yry")
+line = 3
+
+[node name="Judgement" type="Node2D" parent="Gear"]
+position = Vector2(784, 832)
+
+[node name="JudgeLine" type="Sprite2D" parent="Gear"]
+position = Vector2(1024, 832)
+texture = SubResource("GradientTexture2D_w1mac")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Gear"]
+position = Vector2(1024, 1000)
+texture = SubResource("GradientTexture2D_rsfws")
+
+[node name="Control" type="Control" parent="Gear/Sprite2D2"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -80.0
+offset_right = -320.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="Gear/Sprite2D2/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -40.0
+offset_right = 100.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_gvxrt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gameplay_key_pressed" from="InputManager" to="GameManager" method="_on_key_pressed"]
+[connection signal="gameplay_key_released" from="InputManager" to="GameManager" method="_on_key_released"]

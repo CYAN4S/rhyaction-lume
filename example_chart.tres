@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Chart" load_steps=8 format=3 uid="uid://dsqf6i5gjtrf6"]
+
+[ext_resource type="Script" path="res://scripts/resources/note_data.gd" id="1_ffk8x"]
+[ext_resource type="Script" path="res://scripts/resources/chart.gd" id="2_kdlxu"]
+
+[sub_resource type="Resource" id="Resource_t2abt"]
+script = ExtResource("1_ffk8x")
+beat = 1.0
+line = 0
+
+[sub_resource type="Resource" id="Resource_so77g"]
+script = ExtResource("1_ffk8x")
+beat = 0.5
+line = 1
+
+[sub_resource type="Resource" id="Resource_bk3np"]
+script = ExtResource("1_ffk8x")
+beat = 1.0
+line = 2
+
+[sub_resource type="Resource" id="Resource_7wi44"]
+script = ExtResource("1_ffk8x")
+beat = 0.0
+line = 0
+
+[sub_resource type="Resource" id="Resource_fafph"]
+script = ExtResource("1_ffk8x")
+beat = 1.5
+line = 0
+
+[resource]
+script = ExtResource("2_kdlxu")
+notes = Array[ExtResource("1_ffk8x")]([SubResource("Resource_t2abt"), SubResource("Resource_so77g"), SubResource("Resource_bk3np"), SubResource("Resource_7wi44"), SubResource("Resource_fafph")])
