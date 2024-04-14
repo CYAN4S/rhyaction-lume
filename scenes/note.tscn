@@ -8,7 +8,7 @@ colors = PackedColorArray(0.4, 0.4, 0.4, 1, 1, 1, 1, 1, 0.4, 0.4, 0.4, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1xmhd"]
 gradient = SubResource("Gradient_e1ru3")
-width = 160
+width = 120
 height = 40
 
 [node name="Note" type="Sprite2D"]

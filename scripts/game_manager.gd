@@ -5,6 +5,16 @@ extends Node
 @export var chart: Chart
 @export var note_parent: Node2D
 
+@export var score: int:
+	set(value):
+		score = value
+		score_changed.emit(value)
+
+signal score_changed(score: int)
+signal combo_added(combo: int)
+signal combo_breaked()
+
+
 # Type this when nested types are supported
 var note_container: Array[Array] # Array[Array[Note]]
 
@@ -46,16 +56,19 @@ func _on_key_pressed(key: int) -> void:
 	
 	var target: Note = note_container[key][0]
 	var delta: float = target.time - Global.get_time()
+	print(delta)
 	
-	if (delta >= 1.0):
+	if (delta >= 0.2):
 		print("Ignored")
 		return
-	
-	if (delta >= 0.3):
+	if (delta >= 0.04):
+		score += 10
 		print("RUSH")
-	elif (delta >= -0.3):
+	elif (delta >= -0.04):
+		score += 50
 		print("GOOD")
-	elif (delta >= -1.0):
+	elif (delta >= -0.2):
+		score += 10
 		print("DRAG")
 	else:
 		print("MISS")

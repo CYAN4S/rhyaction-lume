@@ -6,7 +6,7 @@ class_name Note
 
 
 func _ready() -> void:
-	position.x = line * 160
+	position.x = line * 120 - 180
 
 
 func _process(delta: float) -> void:
