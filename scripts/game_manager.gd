@@ -1,13 +1,13 @@
 class_name GameManager
 extends Node
-## This is game manager.
 
 @export var chart: Chart
 @export var note_parent: Node2D
+@export var combo: int
 
-@export var score: int:
+@export var score_state: int:
 	set(value):
-		score = value
+		score_state = value
 		score_changed.emit(value)
 
 signal score_changed(score: int)
@@ -17,29 +17,44 @@ signal combo_breaked()
 
 # Type this when nested types are supported
 var note_container: Array[Array] # Array[Array[Note]]
-
 var note_scene := load("res://scenes/note.tscn")
 
 
+# Lifecycle
+
 func _ready() -> void:
-	make_notes()
+	_make_notes()
 	Global.start_timer()
 
 
-func make_notes() -> void:
+func _process(_delta: float):
+	# Check missed notes
+	for note_line: Array[Note] in note_container:
+		if note_line.is_empty():
+			continue
+		
+		if note_line[0].time - Global.get_time() < -0.2:
+			print("MISS")
+			note_line[0].queue_free()
+			note_line.pop_front()
+
+
+# Internal
+
+func _make_notes() -> void:
 	for i in range(4):
 		print(i)
 		note_container.append([])
 	
 	for i in chart.notes:
-		make_note(i)
+		_make_note(i)
 		
-	for note_line: Array in note_container:
+	for note_line: Array[Note] in note_container:
 		print(note_line)
 		note_line.sort_custom(_sort_note_by_time)
 
 
-func make_note(i: NoteData) -> void:
+func _make_note(i: NoteData) -> void:
 	var instance: Note = note_scene.instantiate()
 	
 	instance.line = i.line
@@ -62,23 +77,26 @@ func _on_key_pressed(key: int) -> void:
 		print("Ignored")
 		return
 	if (delta >= 0.04):
-		score += 10
+		score_state += 10
 		print("RUSH")
 	elif (delta >= -0.04):
-		score += 50
+		score_state += 50
 		print("GOOD")
 	elif (delta >= -0.2):
-		score += 10
+		score_state += 10
 		print("DRAG")
 	else:
-		print("MISS")
+		return
 
 	note_container[key].pop_front()
 	target.queue_free()
 
-func _on_key_released(key: int) -> void:
-	pass # Replace with function body.
-
 
 func _sort_note_by_time(a: Note, b: Note) -> bool:
 	return a.time < b.time
+
+
+# Receiver
+
+func _on_key_released(key: int) -> void:
+	pass # Replace with function body.
