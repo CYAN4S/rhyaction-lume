@@ -37,6 +37,7 @@ func _process(_delta: float):
 			print("MISS")
 			note_line[0].queue_free()
 			note_line.pop_front()
+			_break_combo()
 
 
 # Internal
@@ -65,6 +66,22 @@ func _make_note(i: NoteData) -> void:
 	note_container[i.line].append(instance)
 
 
+func _sort_note_by_time(a: Note, b: Note) -> bool:
+	return a.time < b.time
+
+
+func _add_combo() -> void:
+	combo += 1
+	combo_added.emit(combo)
+
+
+func _break_combo() -> void:
+	combo = 0
+	combo_breaked.emit()
+
+
+# Receiver
+
 func _on_key_pressed(key: int) -> void:
 	if (note_container[key].size() == 0):
 		return
@@ -90,13 +107,8 @@ func _on_key_pressed(key: int) -> void:
 
 	note_container[key].pop_front()
 	target.queue_free()
+	_add_combo()
 
-
-func _sort_note_by_time(a: Note, b: Note) -> bool:
-	return a.time < b.time
-
-
-# Receiver
 
 func _on_key_released(key: int) -> void:
 	pass # Replace with function body.

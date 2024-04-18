@@ -9,5 +9,5 @@ func _ready() -> void:
 	position.x = line * 120 - 180
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position.y = (Global.get_time() - time) * 100 * Global.scroll_speed

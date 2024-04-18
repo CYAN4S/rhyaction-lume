@@ -136,6 +136,7 @@ vertical_alignment = 1
 script = ExtResource("6_lax0x")
 
 [connection signal="combo_added" from="GameManager" to="Gear/ComboDebug" method="_on_game_manager_combo_added"]
+[connection signal="combo_breaked" from="GameManager" to="Gear/ComboDebug" method="_on_game_manager_combo_breaked"]
 [connection signal="score_changed" from="GameManager" to="Gear/Sprite2D2/Control/ScoreDebug" method="_on_game_manager_score_changed"]
 [connection signal="gameplay_key_pressed" from="InputManager" to="GameManager" method="_on_key_pressed"]
 [connection signal="gameplay_key_released" from="InputManager" to="GameManager" method="_on_key_released"]

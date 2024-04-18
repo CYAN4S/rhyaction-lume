@@ -9,3 +9,9 @@ func _ready() -> void:
 func _on_game_manager_combo_added(combo: int) -> void:
 	text = str(combo)
 	pass # Replace with function body.
+
+
+
+func _on_game_manager_combo_breaked() -> void:
+	text = ""
+	pass # Replace with function body.
