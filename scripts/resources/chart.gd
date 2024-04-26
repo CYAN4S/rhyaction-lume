@@ -6,3 +6,6 @@ class_name Chart
 
 ## List of notes.
 @export var notes: Array[NoteData]
+
+
+@export var bpm: BpmData

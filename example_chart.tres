@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="Chart" load_steps=8 format=3 uid="uid://dsqf6i5gjtrf6"]
+[gd_resource type="Resource" script_class="Chart" load_steps=10 format=3 uid="uid://dsqf6i5gjtrf6"]
 
 [ext_resource type="Script" path="res://scripts/resources/note_data.gd" id="1_ffk8x"]
+[ext_resource type="Script" path="res://scripts/resources/bpm_data.gd" id="1_lpgmc"]
 [ext_resource type="Script" path="res://scripts/resources/chart.gd" id="2_kdlxu"]
+
+[sub_resource type="Resource" id="Resource_aau6v"]
+script = ExtResource("1_lpgmc")
+standard_bpm = 120.0
+meta = Array[Vector2]([])
 
 [sub_resource type="Resource" id="Resource_t2abt"]
 script = ExtResource("1_ffk8x")
@@ -31,3 +37,4 @@ line = 0
 [resource]
 script = ExtResource("2_kdlxu")
 notes = Array[ExtResource("1_ffk8x")]([SubResource("Resource_t2abt"), SubResource("Resource_so77g"), SubResource("Resource_bk3np"), SubResource("Resource_7wi44"), SubResource("Resource_fafph")])
+bpm = SubResource("Resource_aau6v")
