@@ -10,4 +10,4 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	position.y = (Global.get_time() - time) * 100 * Global.scroll_speed
+	position.y = (Global.time - time) * 100 * Global.scroll_speed

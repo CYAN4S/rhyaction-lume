@@ -33,7 +33,7 @@ func _process(_delta: float):
 		if note_line.is_empty():
 			continue
 		
-		if note_line[0].time - Global.get_time() < -0.2:
+		if note_line[0].time - Global.time < -0.2:
 			print("MISS")
 			note_line[0].queue_free()
 			note_line.pop_front()
@@ -59,7 +59,7 @@ func _make_note(i: NoteData) -> void:
 	var instance: Note = note_scene.instantiate()
 	
 	instance.line = i.line
-	instance.time = i.beat
+	instance.time = i.beat * 60 / chart.bpm.standard_bpm
 	
 	note_parent.add_child(instance)
 	
@@ -87,7 +87,7 @@ func _on_key_pressed(key: int) -> void:
 		return
 	
 	var target: Note = note_container[key][0]
-	var delta: float = target.time - Global.get_time()
+	var delta: float = target.time - Global.time
 	print(delta)
 	
 	if (delta >= 0.2):
