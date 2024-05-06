@@ -1,6 +1,7 @@
 extends Node2D
 class_name Note
 
+@export var beat := 0.0
 @export var time := 0.0
 @export var line := 0
 
